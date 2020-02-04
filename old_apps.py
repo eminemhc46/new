@@ -6,6 +6,7 @@ import os
 import tensorflow as tf
 from keras.engine.topology import Layer
 from keras.engine import InputSpec
+import random
 
 from keras.models import Model
 from keras.layers import Input, Conv2D
@@ -418,7 +419,14 @@ class CycleGAN:
 #            self.dataset_name, epoch, batch_i))
 #        plt.close()
 
-    def test_k_images(self, im_path="1.jpg",translated_path="static/images/output/output.jpg"):
+    def test_k_images(self, im_path="1.jpg",translated_path="static/images/output/"):
+        filess = glob(translated_path+"*")
+        for f in filess:
+            os.remove(f)
+        
+        translated_path = translated_path+"output_"+str(random.randint(1,4454))+".jpg"
+        
+        
         if os.path.exists(translated_path):
             os.remove(translated_path)
         
